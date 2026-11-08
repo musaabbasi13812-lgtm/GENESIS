@@ -1,0 +1,25 @@
+
+name: GENESIS C++ Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure CMake
+        run: cmake -S . -B build
+
+      - name: Build GENESIS
+        run: cmake --build build --config Release
+
+      - name: Run scientific benchmark
+        run: ./build/core/genesis_test
