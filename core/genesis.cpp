@@ -8,7 +8,11 @@
 
 // GENESIS V0.1: controlled hidden-law discovery benchmark.
 // The candidate feature library is explicit; this is not open-ended discovery.
-static double hidden_law(double x) { return 0.7*x*x + 1.4*std::sin(1.7*x) + 0.3*x + 2.0; }
+static double hidden_law(double x) {
+    double signal = 0.7*x*x + 1.4*std::sin(1.7*x) + 0.3*x + 2.0;
+    double noise = 0.03*std::sin(11.0*x) + 0.02*std::cos(7.0*x);
+    return signal + noise;
+}
 static double median(std::vector<double> v) {
   if(v.empty()) return 0;
   std::sort(v.begin(),v.end()); size_t n=v.size();
